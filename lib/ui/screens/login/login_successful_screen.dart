@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:open_app_store/io/app_resources.dart';
 import 'package:open_app_store/io/app_styles.dart';
+import 'package:open_app_store/io/authentication/authenticator.dart';
 
 class LoginSuccessfulScreen extends StatelessWidget{
   const LoginSuccessfulScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(Authenticator.user.photoURL as String);
     return Scaffold(
       backgroundColor: AppStyles.backgroundColor,
       body: SizedBox(
@@ -21,6 +23,20 @@ class LoginSuccessfulScreen extends StatelessWidget{
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Image(
+                    image: NetworkImage(Authenticator.user.photoURL as String),
+                    width: 128,
+                    height: 128,
+                  ),
+                  Text(
+                    "Hello! ${Authenticator.user.displayName}",
+                    style: TextStyle(
+                      fontFamily: "Sen",
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey.shade800
+                    ),
+                  ),
                   const Text(
                     "Login Successful",
                     style: TextStyle(

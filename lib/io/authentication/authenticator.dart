@@ -6,7 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class Authenticator {
 
   static late GoogleSignIn _googleSignIn;
-  static User? user;
+  static late User user;
 
   static Future<void> init() async {
     _googleSignIn = GoogleSignIn();
