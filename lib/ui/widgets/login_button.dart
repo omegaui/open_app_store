@@ -26,7 +26,10 @@ class _GoogleLoginButtonState extends State<GoogleLoginButton> {
           Future.delayed(const Duration(milliseconds: 200), () async {
             setState(() => tapped = false);
             if(await Authenticator.authenticate()){
-              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginSuccessfulScreen()));
+              var page = PageRouteBuilder(pageBuilder: (context, animation, secondaryAnimation) => const LoginSuccessfulScreen(),
+              transitionDuration: const Duration(milliseconds: 400),
+              transitionsBuilder: (context, animation, secondaryAnimation, child) => const FadeUpwardsPageTransitionsBuilder().buildTransitions(MaterialPageRoute(builder: (context) => child), context, animation, secondaryAnimation, child));
+              Navigator.of(context).pushReplacement(page);
             }
             else{
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(

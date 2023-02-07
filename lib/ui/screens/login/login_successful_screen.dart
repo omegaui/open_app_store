@@ -40,16 +40,16 @@ class LoginSuccessfulScreen extends StatelessWidget{
                   TextButton(
                     onPressed: () {},
                     style: TextButton.styleFrom(
-                      backgroundColor: const Color(0xffE32749),
-                      foregroundColor: Colors.white,
-                      elevation: 4,
+                      backgroundColor: AppStyles.backgroundColor,
+                      foregroundColor: Colors.grey.shade800,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
                     ),
                     child: const Padding(
                       padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                       child: Text(
-                        "Dive in",
+                        "🚀 Explore 🚀",
                         style: TextStyle(
+                          fontFamily: "Sen",
                           fontSize: 24,
                         ),
                       ),
