@@ -1,5 +1,10 @@
 
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:open_app_store/io/authentication/authenticator.dart';
+
+import '../screens/login/login_successful_screen.dart';
 
 class GoogleLoginButton extends StatefulWidget{
   const GoogleLoginButton({super.key});
@@ -18,13 +23,36 @@ class _GoogleLoginButtonState extends State<GoogleLoginButton> {
       onTap: () async {
         setState(() {
           tapped = true;
-          Future.delayed(const Duration(milliseconds: 500), () {
+          Future.delayed(const Duration(milliseconds: 200), () async {
             setState(() => tapped = false);
+            if(await Authenticator.authenticate()){
+              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const LoginSuccessfulScreen()));
+            }
+            else{
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Row(
+                  children: [
+                    const Icon(
+                      Icons.error,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(width: 10),
+                    Text(
+                      "Login Failed! Try again. ",
+                      style: TextStyle(fontFamily: 'Itim', color: Colors.grey.shade800, fontSize: 16),
+                    ),
+                  ],
+                ),
+                backgroundColor: Colors.white,
+                padding: const EdgeInsets.all(20),
+                duration: const Duration(milliseconds: 2000),
+              ));
+            }
           });
         });
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 200),
         width: 219,
         height: 54,
         decoration: BoxDecoration(
